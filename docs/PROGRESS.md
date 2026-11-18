@@ -24,3 +24,10 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Decision: pinned TypeScript to 6.x because typescript-eslint does not support TS 7 yet (ADR-004).
 - Verified: `pnpm lint` and `pnpm format:check` pass; commitlint rejects 'bad message' and accepts 'feat(ingest): CSV upload [P2-T1]'.
 - Left half-done: nothing. Next: P0-T3.
+
+## 2026-11-18: P0-T3
+
+- Added @earshot/core, @earshot/db, @earshot/widget (source-level exports, tsc typecheck, Vitest 5) each with a smoke test; db imports core through the workspace.
+- Deviation: no root vitest.workspace.ts (deprecated in Vitest 5); each package runs its own vitest and `pnpm -r test` fans out. The apps-import-core test moves to P0-T4/T5 when the apps exist.
+- Verified: lint, typecheck and test all pass.
+- Left half-done: nothing. Next: P0-T4.

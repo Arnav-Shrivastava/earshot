@@ -22,7 +22,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm lint` and `pnpm format:check` pass; a bad commit message is rejected by the hook.
   - Tests: run commitlint against one valid and one invalid message.
 
-- [ ] **P0-T3 Package skeletons with Vitest**
+- [x] **P0-T3 Package skeletons with Vitest**
   - Goal: `packages/core`, `packages/db`, `packages/widget` as empty buildable TS packages, each with a trivial passing test.
   - Files: `packages/*/package.json`, `tsconfig.json`, `src/index.ts`, `vitest.config.ts`, root `vitest.workspace.ts`.
   - Done when: `pnpm test` runs all three and passes; packages import each other through workspace names.

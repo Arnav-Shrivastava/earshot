@@ -52,7 +52,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `docker compose up --build` brings all three services up healthy and the web placeholder loads on `localhost:3000`.
   - Tests: manual smoke documented in the README; `docker compose config` validated in CI.
 
-- [ ] **P0-T8 CI**
+- [x] **P0-T8 CI**
   - Goal: GitHub Actions workflow running install, lint, format check, typecheck, test, build.
   - Files: `.github/workflows/ci.yml`, pnpm and Playwright caches.
   - Done when: workflow file validates and the same commands pass locally.

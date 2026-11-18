@@ -62,3 +62,9 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Environment note: Norton Antivirus HTTPS scanning on this machine broke TLS inside containers. Fixed locally (not committed) with a local base image earshot-node-local that trusts the Norton root, selected through NODE_IMAGE in the gitignored .env. Certificate verification was not disabled.
 - Verified end to end: `docker compose up --build -d` -> db, web healthy, worker running; /api/health returns ok, home page renders, pgvector 0.8.7 available, `docker compose stop worker` logs 'shutting down (SIGTERM)' and exits 0 (real signal handling confirmed). Stack stopped afterwards (volume kept).
 - Left half-done: nothing. Next: P0-T8.
+
+## 2026-11-18: P0-T8
+
+- Added .github/workflows/ci.yml: job 'check' (frozen install, lint, format:check, typecheck, test, build; Node from .nvmrc, pnpm from packageManager) and job 'compose' (docker compose config + image build). Concurrency cancel, read-only permissions.
+- Verified locally by running the exact same commands (all green). The workflow itself has not run on GitHub because there is no remote yet.
+- Left half-done: nothing. Next: P0-T9.

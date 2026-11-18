@@ -58,7 +58,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: workflow file validates and the same commands pass locally.
   - Tests: run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` locally as the CI dry-run.
 
-- [ ] **P0-T9 Repo docs skeleton**
+- [x] **P0-T9 Repo docs skeleton**
   - Goal: README skeleton, MIT LICENSE, CONTRIBUTING (`docs/DECISIONS.md` and `CLAUDE.md` already exist).
   - Files: `README.md`, `LICENSE`, `CONTRIBUTING.md`.
   - Done when: README explains what Earshot is, the quick start, the repo layout and current status.

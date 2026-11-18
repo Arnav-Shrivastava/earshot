@@ -68,3 +68,10 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Added .github/workflows/ci.yml: job 'check' (frozen install, lint, format:check, typecheck, test, build; Node from .nvmrc, pnpm from packageManager) and job 'compose' (docker compose config + image build). Concurrency cancel, read-only permissions.
 - Verified locally by running the exact same commands (all green). The workflow itself has not run on GitHub because there is no remote yet.
 - Left half-done: nothing. Next: P0-T9.
+
+## 2026-11-18: P0-T9
+
+- Added README (what it is, status, quick start, local dev, layout, docs, security notes), MIT LICENSE, CONTRIBUTING (setup, checks, Conventional Commits, ground rules).
+- Verified: README commands match what was actually run in P0-T7/T8; lint, format check, typecheck, tests pass.
+- Phase 0 is complete. Awaiting owner approval before merging phase-0-setup into main.
+- Left half-done: nothing. Next: P1-T1 (after Phase 0 merge decision).

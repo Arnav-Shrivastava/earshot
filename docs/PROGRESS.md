@@ -54,3 +54,11 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Decision: worker bundle includes all dependencies (tsup noExternal + createRequire banner) because workspace packages ship TS source. Revisit if a native add-on is added.
 - Verified: lint, typecheck, tests pass; worker and the standalone web server both exit 1 with a readable message when env is missing; worker logs JSON when env is valid.
 - Left half-done: nothing. Next: P0-T7.
+
+## 2026-11-18: P0-T7
+
+- Added docker-compose.yml (pgvector/pgvector:pg16 db with healthcheck, web, worker), multi-stage Dockerfiles for web (Next standalone, non-root, healthcheck on new /api/health route) and worker (tsup bundle, non-root), .dockerignore. Required EARSHOT_SECRET is enforced by compose.
+- Decisions: db is published on 127.0.0.1:5433 by default (EARSHOT_DB_PORT) because 5432 clashed with a local Postgres here. Base image is a NODE_IMAGE build arg (default node:22-slim) so people behind TLS-intercepting proxies can supply their own. pnpm 12 fails installs on unapproved build scripts, so esbuild is allowed via allowBuilds in pnpm-workspace.yaml.
+- Environment note: Norton Antivirus HTTPS scanning on this machine broke TLS inside containers. Fixed locally (not committed) with a local base image earshot-node-local that trusts the Norton root, selected through NODE_IMAGE in the gitignored .env. Certificate verification was not disabled.
+- Verified end to end: `docker compose up --build -d` -> db, web healthy, worker running; /api/health returns ok, home page renders, pgvector 0.8.7 available, `docker compose stop worker` logs 'shutting down (SIGTERM)' and exits 0 (real signal handling confirmed). Stack stopped afterwards (volume kept).
+- Left half-done: nothing. Next: P0-T8.

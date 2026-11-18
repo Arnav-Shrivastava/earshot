@@ -46,7 +46,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: starting either app with a missing required variable fails with a clear message; secrets are redacted from logs.
   - Tests: env parsing (valid, missing, malformed); logger redaction test.
 
-- [ ] **P0-T7 Docker and compose**
+- [x] **P0-T7 Docker and compose**
   - Goal: `docker compose up` starts Postgres 16 + pgvector, web and worker.
   - Files: `docker-compose.yml`, `apps/web/Dockerfile`, `apps/worker/Dockerfile`, `.dockerignore`, healthchecks.
   - Done when: `docker compose up --build` brings all three services up healthy and the web placeholder loads on `localhost:3000`.

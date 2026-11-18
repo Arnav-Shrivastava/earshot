@@ -40,7 +40,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm --filter worker dev` starts and exits cleanly on SIGINT/SIGTERM.
   - Tests: unit test for the shutdown handler.
 
-- [ ] **P0-T6 Env validation and logging**
+- [x] **P0-T6 Env validation and logging**
   - Goal: zod-validated environment shared by web and worker; pino logger factory.
   - Files: `packages/core/src/env.ts`, `packages/core/src/logger.ts`, `.env.example`.
   - Done when: starting either app with a missing required variable fails with a clear message; secrets are redacted from logs.

@@ -46,3 +46,11 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Verified: lint, typecheck, 3 worker tests, `pnpm --filter @earshot/worker build`; built worker starts and prints ready.
 - Note: real signal delivery cannot be tested from Git Bash on Windows; it is covered by unit tests and will be checked in Docker (P0-T7).
 - Left half-done: nothing. Next: P0-T6.
+
+## 2026-11-18: P0-T6
+
+- Added zod-validated `loadEnv()` (DATABASE_URL, EARSHOT_SECRET >=32 chars, APP_URL, LOG_LEVEL; empty strings count as unset; reports all problems at once) and a pino `createLogger()` with secret redaction (top-level and nested keys, x-api-key header) to @earshot/core.
+- Wired in: worker validates env at start and logs JSON via pino; web validates in instrumentation (Node-only file, skipped during `next build` so images build without secrets). Added .env.example.
+- Decision: worker bundle includes all dependencies (tsup noExternal + createRequire banner) because workspace packages ship TS source. Revisit if a native add-on is added.
+- Verified: lint, typecheck, tests pass; worker and the standalone web server both exit 1 with a readable message when env is missing; worker logs JSON when env is valid.
+- Left half-done: nothing. Next: P0-T7.

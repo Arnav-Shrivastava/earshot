@@ -1,0 +1,19 @@
+{
+  "name": "earshot",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Self-hosted feedback triage for solo founders and indie devs.",
+  "license": "MIT",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck",
+    "build": "pnpm -r --if-present build",
+    "test": "pnpm -r --if-present test",
+    "lint": "echo \"lint not configured yet\"",
+    "format": "echo \"format not configured yet\"",
+    "format:check": "echo \"format not configured yet\""
+  }
+}

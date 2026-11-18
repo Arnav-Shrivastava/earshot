@@ -10,3 +10,8 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Created `CLAUDE.md`, `docs/DECISIONS.md` (ADR-001 to ADR-003) and `.gitignore`.
 - Decisions: orange text token added for AA contrast (ADR-003); Discord bot, scraper, alerts and digest moved to Later (ADR-002).
 - Left half-done: nothing. Next task: P0-T1 (Workspace root).
+
+## 2026-11-18: P0-T1
+- Added root package.json (pnpm@12.18.0, Node >=22), pnpm-workspace.yaml, tsconfig.base.json (strict + noUncheckedIndexedAccess), .nvmrc, .editorconfig, .gitattributes (LF line endings).
+- Verified: `pnpm install` and `pnpm -r typecheck` succeed (no packages yet).
+- Left half-done: nothing. Next: P0-T2.

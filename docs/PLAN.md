@@ -10,7 +10,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
 
 ## Phase 0: Repo setup (branch `phase-0-setup`)
 
-- [ ] **P0-T1 Workspace root**
+- [x] **P0-T1 Workspace root**
   - Goal: pnpm monorepo with shared TypeScript config.
   - Files: `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `.nvmrc` (22), `.editorconfig`.
   - Done when: `pnpm install` succeeds and `pnpm -r typecheck` runs across empty packages.

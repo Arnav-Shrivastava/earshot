@@ -10,55 +10,55 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
 
 ## Phase 0: Repo setup (branch `phase-0-setup`)
 
-- [ ] **P0-T1 Workspace root**
+- [x] **P0-T1 Workspace root**
   - Goal: pnpm monorepo with shared TypeScript config.
   - Files: `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`, `.nvmrc` (22), `.editorconfig`.
   - Done when: `pnpm install` succeeds and `pnpm -r typecheck` runs across empty packages.
   - Tests: none (config only); verified by running `pnpm -r typecheck`.
 
-- [ ] **P0-T2 Lint, format, commit hooks**
+- [x] **P0-T2 Lint, format, commit hooks**
   - Goal: ESLint (flat config, typescript-eslint), Prettier, husky, lint-staged, commitlint (Conventional Commits).
   - Files: `eslint.config.mjs`, `.prettierrc`, `.prettierignore`, `commitlint.config.mjs`, `.husky/*`, root scripts `lint`, `format`, `format:check`.
   - Done when: `pnpm lint` and `pnpm format:check` pass; a bad commit message is rejected by the hook.
   - Tests: run commitlint against one valid and one invalid message.
 
-- [ ] **P0-T3 Package skeletons with Vitest**
+- [x] **P0-T3 Package skeletons with Vitest**
   - Goal: `packages/core`, `packages/db`, `packages/widget` as empty buildable TS packages, each with a trivial passing test.
   - Files: `packages/*/package.json`, `tsconfig.json`, `src/index.ts`, `vitest.config.ts`, root `vitest.workspace.ts`.
   - Done when: `pnpm test` runs all three and passes; packages import each other through workspace names.
   - Tests: one smoke test per package; one test proving `apps/*` can import `@earshot/core`.
 
-- [ ] **P0-T4 Web app skeleton**
+- [x] **P0-T4 Web app skeleton**
   - Goal: Next.js App Router + Tailwind + shadcn/ui configured with design tokens from `docs/DESIGN.md`.
   - Files: `apps/web/*`, `globals.css`, `tailwind.config.ts`, `components.json`, Inter and Space Grotesk via `next/font`, a placeholder home page.
   - Done when: `pnpm --filter web dev` serves a page using the Earshot ground color and fonts; `pnpm --filter web build` passes.
   - Tests: Vitest render test of the placeholder page; a test asserting the tokens exist in `globals.css`.
 
-- [ ] **P0-T5 Worker skeleton**
+- [x] **P0-T5 Worker skeleton**
   - Goal: Node/TS worker process that starts, logs, and shuts down gracefully (pg-boss wired in P1).
   - Files: `apps/worker/package.json`, `src/index.ts`, `src/shutdown.ts`.
   - Done when: `pnpm --filter worker dev` starts and exits cleanly on SIGINT/SIGTERM.
   - Tests: unit test for the shutdown handler.
 
-- [ ] **P0-T6 Env validation and logging**
+- [x] **P0-T6 Env validation and logging**
   - Goal: zod-validated environment shared by web and worker; pino logger factory.
   - Files: `packages/core/src/env.ts`, `packages/core/src/logger.ts`, `.env.example`.
   - Done when: starting either app with a missing required variable fails with a clear message; secrets are redacted from logs.
   - Tests: env parsing (valid, missing, malformed); logger redaction test.
 
-- [ ] **P0-T7 Docker and compose**
+- [x] **P0-T7 Docker and compose**
   - Goal: `docker compose up` starts Postgres 16 + pgvector, web and worker.
   - Files: `docker-compose.yml`, `apps/web/Dockerfile`, `apps/worker/Dockerfile`, `.dockerignore`, healthchecks.
   - Done when: `docker compose up --build` brings all three services up healthy and the web placeholder loads on `localhost:3000`.
   - Tests: manual smoke documented in the README; `docker compose config` validated in CI.
 
-- [ ] **P0-T8 CI**
+- [x] **P0-T8 CI**
   - Goal: GitHub Actions workflow running install, lint, format check, typecheck, test, build.
   - Files: `.github/workflows/ci.yml`, pnpm and Playwright caches.
   - Done when: workflow file validates and the same commands pass locally.
   - Tests: run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` locally as the CI dry-run.
 
-- [ ] **P0-T9 Repo docs skeleton**
+- [x] **P0-T9 Repo docs skeleton**
   - Goal: README skeleton, MIT LICENSE, CONTRIBUTING (`docs/DECISIONS.md` and `CLAUDE.md` already exist).
   - Files: `README.md`, `LICENSE`, `CONTRIBUTING.md`.
   - Done when: README explains what Earshot is, the quick start, the repo layout and current status.

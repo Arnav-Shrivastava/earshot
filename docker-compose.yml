@@ -1,0 +1,54 @@
+# Earshot: docker compose up --build
+# Copy .env.example to .env and set EARSHOT_SECRET first.
+name: earshot
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: earshot
+      POSTGRES_PASSWORD: earshot
+      POSTGRES_DB: earshot
+    volumes:
+      - earshot-db:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${EARSHOT_DB_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U earshot -d earshot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-slim}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment: &app-env
+      DATABASE_URL: postgres://earshot:earshot@db:5432/earshot
+      EARSHOT_SECRET: ${EARSHOT_SECRET:?Set EARSHOT_SECRET in .env (openssl rand -base64 32)}
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    ports:
+      - "3000:3000"
+
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-slim}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment: *app-env
+
+volumes:
+  earshot-db:

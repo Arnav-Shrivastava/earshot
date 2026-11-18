@@ -1,0 +1,14 @@
+**/node_modules
+**/.next
+**/dist
+**/coverage
+.git
+.husky
+.claude
+.env
+.env.*
+!.env.example
+docs
+*.md
+Dockerfile*
+docker-compose*.yml

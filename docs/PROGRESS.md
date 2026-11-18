@@ -84,3 +84,11 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Decisions: pnpm denies the optional native builds from Testcontainers (cpu-features, protobufjs, ssh2) in allowBuilds because pnpm 12 fails installs on unapproved build scripts. Env error example now uses port 5433.
 - Known limitation: DEFAULT_MIGRATIONS_FOLDER uses import.meta.url relative to the source file; the worker bundle will need the folder copied or passed explicitly when it runs migrations on start (decide in P1-T5 or P8).
 - Left half-done: nothing. Next: P1-T2 (sources and feedback tables).
+
+## 2026-11-18: P1-T2
+
+- Added Drizzle schema + migration 0001 for `sources` (type, config JSON, encrypted secrets column, status, sync cursor, last sync/error) and `feedback_items` (raw text, author, paying flag, timestamps, metadata, classification fields, `embedding vector(512)`, pipeline status/attempts/error). Enums for source type/status, feedback type, severity, sentiment, pipeline status; exported TS types and value arrays.
+- Constraints/indexes: unique (source_id, external_id) (NULL external ids allowed), index on content_hash, pipeline_status, occurred_at; FK to sources with cascade delete. EMBEDDING_DIMENSIONS=512 lives in @earshot/core so the DB and LLM providers share it.
+- Tests (real Postgres via Testcontainers, 20 in db): defaults, JSON fields, enum rejection, duplicate external id rejected but allowed across sources and when NULL, content_hash index exists, cascade delete, FK violation, classification round-trip, 512-dim vector round-trip, wrong dimension rejected, cosine nearest-neighbour query. Added shared test helpers (setupTestDb with reset, pgErrorMessage to unwrap drizzle errors).
+- Decisions: no standalone index on source_id (the unique constraint already covers it); content-hash dedupe stays in the ingest service (P2-T2), the index is non-unique on purpose. `db:check` reports no drift.
+- Left half-done: nothing. Next: P1-T3 (issues tables).

@@ -74,7 +74,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm db:migrate` creates the `vector` extension on a fresh Postgres.
   - Tests: integration test using a real Postgres 16 + pgvector container (Testcontainers) running migrations twice (idempotent).
 
-- [ ] **P1-T2 Sources and feedback tables**
+- [x] **P1-T2 Sources and feedback tables**
   - Goal: `sources` (type, config, sync cursor, status) and `feedback_items` (raw text, normalized fields, content hash, classification columns, `embedding vector(512)`).
   - Files: `packages/db/src/schema/sources.ts`, `feedback.ts`, migration.
   - Done when: migration applies; unique constraint on `(source_id, external_id)` and index on content hash exist.

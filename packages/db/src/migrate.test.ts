@@ -1,8 +1,10 @@
+import { readdirSync } from "node:fs";
+
 import type { StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { createDb } from "./client";
-import { runMigrations } from "./migrate";
+import { DEFAULT_MIGRATIONS_FOLDER, runMigrations } from "./migrate";
 import { startTestPostgres } from "./testing/postgres";
 
 describe("migrations (real Postgres 16 + pgvector)", () => {
@@ -38,7 +40,9 @@ describe("migrations (real Postgres 16 + pgvector)", () => {
     await runMigrations(container.getConnectionUri());
 
     const applied = await query("SELECT id FROM drizzle.__drizzle_migrations");
-    expect(applied).toHaveLength(1);
+    expect(applied).toHaveLength(
+      readdirSync(DEFAULT_MIGRATIONS_FOLDER).filter((f) => f.endsWith(".sql")).length,
+    );
   });
 
   it("can store and query a vector once migrated", async () => {

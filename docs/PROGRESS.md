@@ -75,3 +75,12 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Verified: README commands match what was actually run in P0-T7/T8; lint, format check, typecheck, tests pass.
 - Phase 0 is complete. Awaiting owner approval before merging phase-0-setup into main.
 - Left half-done: nothing. Next: P1-T1 (after Phase 0 merge decision).
+
+## 2026-11-18: P1-T1
+
+- Added Drizzle to @earshot/db: drizzle.config.ts, `createDb()` (pg pool + drizzle), `runMigrations()`, a `db:migrate` CLI (reads .env, validates env through core), `db:generate`/`db:check` scripts, and migration 0000_extensions.sql (CREATE EXTENSION vector).
+- Tests: Testcontainers integration tests on pgvector/pgvector:pg16 (fresh DB gets the extension, running twice is idempotent with one history row, vector distance query works, unreachable DB rejects) plus a migrations-folder check. DB tests need Docker running; CI already has it.
+- Verified manually: against the compose db, `pnpm --filter @earshot/db db:migrate` works twice in a row after dropping the extension; `db:check` reports no drift; missing DATABASE_URL gives the readable env error.
+- Decisions: pnpm denies the optional native builds from Testcontainers (cpu-features, protobufjs, ssh2) in allowBuilds because pnpm 12 fails installs on unapproved build scripts. Env error example now uses port 5433.
+- Known limitation: DEFAULT_MIGRATIONS_FOLDER uses import.meta.url relative to the source file; the worker bundle will need the folder copied or passed explicitly when it runs migrations on start (decide in P1-T5 or P8).
+- Left half-done: nothing. Next: P1-T2 (sources and feedback tables).

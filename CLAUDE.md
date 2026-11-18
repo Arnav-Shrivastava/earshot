@@ -50,4 +50,5 @@ Source of truth: `docs/STACK.md`, `docs/FEATURES.md`, `docs/DESIGN.md`, `docs/PL
 
 - `pnpm install`: install dependencies
 - `pnpm lint`, `pnpm format:check`, `pnpm typecheck`, `pnpm test`, `pnpm build`
+- `docker compose up -d db` then `pnpm --filter @earshot/db db:migrate`: start Postgres and apply migrations (db tests start their own container, so Docker must be running)
 - `docker compose up --build`: run the full stack

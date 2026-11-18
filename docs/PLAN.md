@@ -68,7 +68,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
 
 ## Phase 1: Database schema, migrations, seed (branch `phase-1-schema`)
 
-- [ ] **P1-T1 DB package and migration runner**
+- [x] **P1-T1 DB package and migration runner**
   - Goal: Drizzle config, connection factory, migration runner, pgvector extension migration.
   - Files: `packages/db/drizzle.config.ts`, `src/client.ts`, `src/migrate.ts`, `drizzle/0000_extensions.sql`.
   - Done when: `pnpm db:migrate` creates the `vector` extension on a fresh Postgres.

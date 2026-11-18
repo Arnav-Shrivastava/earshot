@@ -6,7 +6,7 @@ export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   DATABASE_URL: z
     .string({
-      error: "DATABASE_URL is required (e.g. postgres://earshot:earshot@localhost:5432/earshot)",
+      error: "DATABASE_URL is required (e.g. postgres://earshot:earshot@localhost:5433/earshot)",
     })
     .regex(/^postgres(ql)?:\/\//, "DATABASE_URL must start with postgres:// or postgresql://"),
   EARSHOT_SECRET: z

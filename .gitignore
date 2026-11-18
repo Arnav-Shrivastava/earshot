@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# env (keep the example)
+.env
+.env.*
+!.env.example
+
+# build output
+.next/
+dist/
+build/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# test and coverage
+coverage/
+playwright-report/
+test-results/
+.vitest/
+
+# eval reports
+eval/reports/*
+!eval/reports/.gitkeep
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# local tooling
+.claude/
+.turbo/

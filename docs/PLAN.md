@@ -16,7 +16,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm install` succeeds and `pnpm -r typecheck` runs across empty packages.
   - Tests: none (config only); verified by running `pnpm -r typecheck`.
 
-- [ ] **P0-T2 Lint, format, commit hooks**
+- [x] **P0-T2 Lint, format, commit hooks**
   - Goal: ESLint (flat config, typescript-eslint), Prettier, husky, lint-staged, commitlint (Conventional Commits).
   - Files: `eslint.config.mjs`, `.prettierrc`, `.prettierignore`, `commitlint.config.mjs`, `.husky/*`, root scripts `lint`, `format`, `format:check`.
   - Done when: `pnpm lint` and `pnpm format:check` pass; a bad commit message is rejected by the hook.

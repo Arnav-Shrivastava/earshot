@@ -3,6 +3,7 @@
 Append a dated entry after every completed task. If a session ends mid-task, record the exact stopping point and next step.
 
 ## 2026-11-18: Project scaffolding and planning
+
 - Confirmed the stack with the owner and wrote `docs/STACK.md` (MIT, ESLint + Prettier, all defaults accepted).
 - Confirmed the feature list and the MVP/Later split in `docs/FEATURES.md`.
 - Wrote `docs/DESIGN.md` with design tokens (CSS variables + Tailwind theme). No mockups in `docs/design/` yet.
@@ -12,6 +13,14 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Left half-done: nothing. Next task: P0-T1 (Workspace root).
 
 ## 2026-11-18: P0-T1
+
 - Added root package.json (pnpm@12.18.0, Node >=22), pnpm-workspace.yaml, tsconfig.base.json (strict + noUncheckedIndexedAccess), .nvmrc, .editorconfig, .gitattributes (LF line endings).
 - Verified: `pnpm install` and `pnpm -r typecheck` succeed (no packages yet).
 - Left half-done: nothing. Next: P0-T2.
+
+## 2026-11-18: P0-T2
+
+- Added ESLint 10 flat config (typescript-eslint, no-explicit-any, consistent-type-imports), Prettier, husky (pre-commit lint-staged, commit-msg commitlint), commitlint with Conventional Commits.
+- Decision: pinned TypeScript to 6.x because typescript-eslint does not support TS 7 yet (ADR-004).
+- Verified: `pnpm lint` and `pnpm format:check` pass; commitlint rejects 'bad message' and accepts 'feat(ingest): CSV upload [P2-T1]'.
+- Left half-done: nothing. Next: P0-T3.

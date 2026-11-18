@@ -15,6 +15,13 @@
       "when": 1795026186238,
       "tag": "0001_sources_and_feedback",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795026278388,
+      "tag": "0002_issues",
+      "breakpoints": true
     }
   ]
 }

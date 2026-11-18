@@ -80,7 +80,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: migration applies; unique constraint on `(source_id, external_id)` and index on content hash exist.
   - Tests: insert and duplicate-rejection tests; vector column round-trip.
 
-- [ ] **P1-T3 Issues tables**
+- [x] **P1-T3 Issues tables**
   - Goal: `issues` (title, summary, status, priority, assignee, score and score breakdown JSON, centroid embedding), `issue_feedback` join, `issue_events` activity log, `notes`.
   - Files: `packages/db/src/schema/issues.ts`, migration.
   - Done when: status enum covers Triage, Planned, In progress, Shipped; HNSW index on centroid.

@@ -92,3 +92,11 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Tests (real Postgres via Testcontainers, 20 in db): defaults, JSON fields, enum rejection, duplicate external id rejected but allowed across sources and when NULL, content_hash index exists, cascade delete, FK violation, classification round-trip, 512-dim vector round-trip, wrong dimension rejected, cosine nearest-neighbour query. Added shared test helpers (setupTestDb with reset, pgErrorMessage to unwrap drizzle errors).
 - Decisions: no standalone index on source_id (the unique constraint already covers it); content-hash dedupe stays in the ingest service (P2-T2), the index is non-unique on purpose. `db:check` reports no drift.
 - Left half-done: nothing. Next: P1-T3 (issues tables).
+
+## 2026-11-18: P1-T3
+
+- Added migration 0002 and schema for `issues`, `issue_feedback`, `issue_events` and `notes`.
+- issues: title, summary, status (triage/planned/in_progress/shipped), priority, free-text assignee, mention count, first/last seen, score + JSON breakdown + reason, `centroid vector(512)` with an HNSW cosine index, linked ticket URL, shipped_at and release_note (added now so P7 needs no schema change). issue_feedback: feedback_id is the primary key so an item belongs to at most one issue; stores similarity and method (similarity/llm/manual). issue_events: append-only log with an enum of event types and JSON data. notes: body + author.
+- Tests (17 new, 37 in db, real Postgres): defaults, all four statuses accepted and unknown rejected, score breakdown JSON, HNSW index exists and nearest-issue query returns the right row, one-issue-per-feedback enforced, cascades both ways (issue delete keeps feedback, feedback delete keeps issue), event log defaults and enum rejection, notes cascade.
+- Decisions: assignee is plain text (the single-owner model has no users table to point at; 'me' is resolved by the app). No progress column: the dashboard progress bars will be derived from status/steps in the UI phase. Adding new event types later needs an ALTER TYPE migration. `db:check` reports no drift.
+- Left half-done: nothing. Next: P1-T4 (settings, usage, drafts, auth, API keys tables).

@@ -34,7 +34,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm --filter web dev` serves a page using the Earshot ground color and fonts; `pnpm --filter web build` passes.
   - Tests: Vitest render test of the placeholder page; a test asserting the tokens exist in `globals.css`.
 
-- [ ] **P0-T5 Worker skeleton**
+- [x] **P0-T5 Worker skeleton**
   - Goal: Node/TS worker process that starts, logs, and shuts down gracefully (pg-boss wired in P1).
   - Files: `apps/worker/package.json`, `src/index.ts`, `src/shutdown.ts`.
   - Done when: `pnpm --filter worker dev` starts and exits cleanly on SIGINT/SIGTERM.

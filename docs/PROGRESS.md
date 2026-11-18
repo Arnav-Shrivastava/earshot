@@ -39,3 +39,10 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Verified: lint, typecheck, 9 web tests, `next build` pass; `next dev` served the page with HTTP 200. The apps-import-core test is done here.
 - Not done yet: shadcn CLI-generated components (only a hand-written Button so far); real shadcn components get added as the UI phase needs them.
 - Left half-done: nothing. Next: P0-T5.
+
+## 2026-11-18: P0-T5
+
+- Added apps/worker: tsx dev, tsup build (bundles workspace TS packages), start script, and a tested registerShutdown helper (SIGINT/SIGTERM, ordered tasks, run-once, failure -> exit 1, timeout).
+- Verified: lint, typecheck, 3 worker tests, `pnpm --filter @earshot/worker build`; built worker starts and prints ready.
+- Note: real signal delivery cannot be tested from Git Bash on Windows; it is covered by unit tests and will be checked in Docker (P0-T7).
+- Left half-done: nothing. Next: P0-T6.

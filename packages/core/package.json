@@ -10,10 +10,17 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "queue:ping": "tsx --env-file-if-exists=../../.env src/cli/ping.ts"
   },
   "dependencies": {
+    "pg-boss": "^12.38.2",
     "pino": "^10.4.0",
     "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@testcontainers/postgresql": "^12.2.1",
+    "testcontainers": "^12.2.1",
+    "tsx": "^4.23.15"
   }
 }

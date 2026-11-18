@@ -108,3 +108,13 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - CI: new step 'Migrations match the schema' runs `db:drift` (drizzle-kit check + generate) and fails if any migration file changes. Proved locally: a deliberate schema edit with no migration produced a new migration file (failure), then I reverted it.
 - Decisions: better-auth tables were written by hand from its default schema; P2-T1 must confirm they match what better-auth expects and adjust with a new migration if not. Clustering threshold defaults (0.85 join, 0.70 new) are starting points to tune in P3-T6/P4. Model names have no DB default by design.
 - Left half-done: nothing. Next: P1-T5 (pg-boss wiring).
+
+## 2026-11-19: P1-T5
+
+- Added `createQueue()` to @earshot/core: a typed pg-boss v12 wrapper with a JOB_SCHEMAS registry (zod payload per job; only health.ping so far), roles worker (runs maintenance/scheduling) and producer (enqueue only), payload validation on enqueue and on handling, error/warning events routed to the logger (no unhandled-error crash), queues created idempotently. health.ping has retryLimit 0; other jobs default to 3 retries.
+- Worker: connects to pg-boss, registers job handlers (jobs/index.ts), logs each health.ping with its latency, stops the queue gracefully on SIGTERM. Added `pnpm --filter @earshot/core queue:ping` (producer script) and CORE vitest timeouts for container tests.
+- Tests: 6 integration tests on a real Postgres (delivery with validated payload, job marked completed, producer->worker across two instances, a throwing handler fails the job but not the worker, invalid payload rejected before the DB, repeated/multi-process start is safe) + 2 worker unit tests.
+- Verified manually: built worker on the host and the Docker worker image both logged 'health.ping received' for a job enqueued with queue:ping; the job shows completed in pgboss.job; SIGTERM exits 0.
+- Decisions: pg-boss keeps its own tables in the `pgboss` schema (managed by pg-boss, not Drizzle). A producer started before any worker is fine because it also creates the queues. Worker bundle with pg-boss works under tsup (2.3 MB).
+- Not done / for later: nothing runs DB migrations automatically at container start yet (needed before P2 so `docker compose up` gives a ready database); I'll decide where in P2-T1/P8 and note it in the plan if needed.
+- Left half-done: nothing. Next: P1-T6 (typed repositories).

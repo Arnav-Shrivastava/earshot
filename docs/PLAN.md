@@ -92,7 +92,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: all migrations apply from scratch and `drizzle-kit check` reports no drift.
   - Tests: migration-drift check in CI; basic insert tests.
 
-- [ ] **P1-T5 pg-boss wiring**
+- [x] **P1-T5 pg-boss wiring**
   - Goal: worker connects to pg-boss, registers a no-op `health.ping` job, and web can enqueue to it.
   - Files: `packages/core/src/queue.ts`, `apps/worker/src/index.ts`.
   - Done when: enqueuing `health.ping` from a script results in the worker logging it.

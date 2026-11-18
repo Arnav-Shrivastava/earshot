@@ -1,11 +1,11 @@
-import { EnvError, createLogger, loadEnv } from "@earshot/core";
+import { EnvError, createLogger, createQueue, loadEnv, type Env } from "@earshot/core";
 
+import { registerJobs } from "./jobs";
 import { registerShutdown } from "./shutdown";
 
-function main(): void {
-  let env;
+function readEnv(): Env {
   try {
-    env = loadEnv();
+    return loadEnv();
   } catch (error) {
     if (error instanceof EnvError) {
       process.stderr.write(`${error.message}\n`);
@@ -13,15 +13,24 @@ function main(): void {
     }
     throw error;
   }
+}
 
+async function main(): Promise<void> {
+  const env = readEnv();
   const logger = createLogger({ name: "worker", level: env.LOG_LEVEL });
   logger.info("starting");
 
-  // pg-boss, connectors and pipeline jobs are wired in later phases.
-  const heartbeat = setInterval(() => {}, 60_000);
+  const queue = createQueue(env.DATABASE_URL, { role: "worker", logger });
+  await queue.start();
+  await registerJobs(queue, logger);
 
-  registerShutdown([() => clearInterval(heartbeat)], { log: (message) => logger.info(message) });
+  registerShutdown([() => queue.stop()], { log: (message) => logger.info(message) });
   logger.info("ready");
 }
 
-main();
+main().catch((error: unknown) => {
+  process.stderr.write(
+    `Worker failed to start: ${error instanceof Error ? error.message : String(error)}\n`,
+  );
+  process.exit(1);
+});

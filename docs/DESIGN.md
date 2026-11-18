@@ -84,43 +84,24 @@ Orange `#E8590C` fails AA for small text, so small orange text uses the darker `
 
 Dark mode is out of scope for v0.1.
 
-### Tailwind theme (`apps/web/tailwind.config.ts`)
+### Tailwind theme (Tailwind v4, `@theme inline` in `apps/web/src/app/globals.css`)
 
-```ts
-import type { Config } from "tailwindcss";
+Tailwind v4 is CSS-first, so there is no `tailwind.config.ts`. The theme maps the variables above to utilities
+(`bg-ground`, `text-ink-muted`, `bg-accent`, `text-orange-text`, `rounded-card`, `font-heading`, `min-h-touch`, ...):
 
-export default {
-  content: ["./src/**/*.{ts,tsx}", "../../packages/**/*.{ts,tsx}"],
-  theme: {
-    extend: {
-      colors: {
-        ground: "var(--ground)",
-        surface: { DEFAULT: "var(--surface)", sunken: "var(--surface-sunken)" },
-        border: { DEFAULT: "var(--border)", strong: "var(--border-strong)" },
-        ink: { DEFAULT: "var(--ink)", muted: "var(--ink-muted)" },
-        accent: {
-          DEFAULT: "var(--accent)",
-          hover: "var(--accent-hover)",
-          soft: "var(--accent-soft)",
-          foreground: "var(--ink-on-accent)",
-        },
-        orange: {
-          DEFAULT: "var(--orange)",
-          text: "var(--orange-text)",
-          soft: "var(--orange-soft)",
-        },
-        positive: { DEFAULT: "var(--positive)", soft: "var(--positive-soft)" },
-      },
-      borderRadius: { card: "var(--radius-card)", control: "var(--radius-control)" },
-      fontFamily: {
-        sans: ["var(--font-body)"],
-        heading: ["var(--font-heading)"],
-      },
-      minHeight: { touch: "var(--touch-target)" },
-      minWidth: { touch: "var(--touch-target)" },
-    },
-  },
-} satisfies Config;
+```css
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-orange-text: var(--orange-text);
+  --radius-card: var(--radius-card);
+  --font-heading: var(--font-heading);
+  --min-height-touch: var(--touch-target);
+  /* ...full list in globals.css, including the shadcn/ui names */
+}
 ```
 
 shadcn/ui components are themed through these variables, not by editing component internals.

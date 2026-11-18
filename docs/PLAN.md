@@ -28,7 +28,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: `pnpm test` runs all three and passes; packages import each other through workspace names.
   - Tests: one smoke test per package; one test proving `apps/*` can import `@earshot/core`.
 
-- [ ] **P0-T4 Web app skeleton**
+- [x] **P0-T4 Web app skeleton**
   - Goal: Next.js App Router + Tailwind + shadcn/ui configured with design tokens from `docs/DESIGN.md`.
   - Files: `apps/web/*`, `globals.css`, `tailwind.config.ts`, `components.json`, Inter and Space Grotesk via `next/font`, a placeholder home page.
   - Done when: `pnpm --filter web dev` serves a page using the Earshot ground color and fonts; `pnpm --filter web build` passes.

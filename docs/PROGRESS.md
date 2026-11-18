@@ -31,3 +31,11 @@ Append a dated entry after every completed task. If a session ends mid-task, rec
 - Deviation: no root vitest.workspace.ts (deprecated in Vitest 5); each package runs its own vitest and `pnpm -r test` fans out. The apps-import-core test moves to P0-T4/T5 when the apps exist.
 - Verified: lint, typecheck and test all pass.
 - Left half-done: nothing. Next: P0-T4.
+
+## 2026-11-18: P0-T4
+
+- Added apps/web: Next.js 16 App Router, Tailwind v4 with Earshot tokens in globals.css (mapped onto the shadcn/ui variable contract), self-hosted Inter and Space Grotesk, lucide, a token-based Button, placeholder home page, standalone output for Docker.
+- Decisions: Tailwind v4 CSS-first theme and fontsource fonts (ADR-005); DESIGN.md updated.
+- Verified: lint, typecheck, 9 web tests, `next build` pass; `next dev` served the page with HTTP 200. The apps-import-core test is done here.
+- Not done yet: shadcn CLI-generated components (only a hand-written Button so far); real shadcn components get added as the UI phase needs them.
+- Left half-done: nothing. Next: P0-T5.

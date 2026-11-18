@@ -86,7 +86,7 @@ Legend per task: **Goal** · **Files** · **Done when** · **Tests**.
   - Done when: status enum covers Triage, Planned, In progress, Shipped; HNSW index on centroid.
   - Tests: constraint tests; nearest-neighbour query test on seeded vectors.
 
-- [ ] **P1-T4 Settings, usage, drafts, auth, API keys tables**
+- [x] **P1-T4 Settings, usage, drafts, auth, API keys tables**
   - Goal: `settings` (single row, encrypted key column), `llm_usage`, `reply_drafts`, `api_keys` (hashed), better-auth tables.
   - Files: `packages/db/src/schema/settings.ts`, `usage.ts`, `drafts.ts`, `auth.ts`.
   - Done when: all migrations apply from scratch and `drizzle-kit check` reports no drift.

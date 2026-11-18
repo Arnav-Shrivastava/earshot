@@ -13,7 +13,8 @@
     "test": "vitest run",
     "db:generate": "drizzle-kit generate",
     "db:check": "drizzle-kit check",
-    "db:migrate": "tsx --env-file-if-exists=../../.env src/migrate-cli.ts"
+    "db:migrate": "tsx --env-file-if-exists=../../.env src/migrate-cli.ts",
+    "db:drift": "drizzle-kit check && drizzle-kit generate"
   },
   "dependencies": {
     "@earshot/core": "workspace:*",
